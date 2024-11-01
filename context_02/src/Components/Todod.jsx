@@ -21,24 +21,24 @@ function Todod({ todo }) {
   } 
   
   return (
-    <div key={todo.id} className='flex justify-between w-[1000px] rounded-2xl bg-white border-2 border-teal-300 h-10 px-3 content-center items-center m-2'>
-      <input type='checkbox' onClick={isClicked}/>
+    <div key={todo.id} className={`flex justify-between w-[1000px] rounded-2xl ${readonly?"bg-white":"bg-green-300"} border-2 border-teal-300 h-10 px-3 content-center items-center m-2`}>
+      <input type='checkbox' onClick={isClicked} checked={todo.completed}/>
       <input
-        className={`w-[700px] outline-none ${todo.completed?"line-through":""}`}
+        className={`w-[700px] bg-transparent outline-none ${todo.completed?"line-through":""}`}
         value={newTodo}
         readOnly={readonly}
         onChange={(e) => setNewTodo(e.target.value)}
       />
       <div className='flex gap-4'>
-        <button 
-          className={`${readonly ? "bg-green-400" : "bg-gray-600"}`} 
+        {!todo.completed &&<button 
+          className={`${readonly ? "bg-green-400" : "bg-gray-600"} rounded-lg px-3` } 
           onClick={toggleEdit}
         >
           {readonly ? 'Edit' : 'Save'}
-        </button>
+        </button>}
         <button 
           onClick={() => handleClick(todo.id)} 
-          className='text-red-700 font-extrabold text-xl'
+          className='text-red-700 font-extrabold text-xl h-7 w-7 rounded-full bg-red-400'
         >
           X
         </button>
