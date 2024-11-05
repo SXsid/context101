@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit"
 import CounterReducer from "../features/Counterslice"
+import  postReducer, { postSlice } from "../features/PostApiSlice"
 
 export const store = configureStore({
     reducer:{
         //multiple slices in same store 
-        counter:CounterReducer
-    }
+        counter:CounterReducer,
+        [postSlice.reducerPath]:postReducer
+    },
+    middleware:(getDefaultMiddleware)=>{
+        return getDefaultMiddleware().concat(postSlice.middleware)
+    },
 })
 
 // types of the state need to be send

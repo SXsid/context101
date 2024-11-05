@@ -1,15 +1,19 @@
 
 import { useDispatch, useSelector } from 'react-redux'
-import './App.css'
+
 import { AppDispatch, RootState } from './app/store'
 import {increment,decrement,incrementAsync} from "./features/Counterslice"
+import DataFetching from './DataFetching'
+import Posts from './Posts'
+import Albums from './Albums'
 
 function App() {
  
 
   return (
     <>
-     <Counter/>
+     <Posts/>
+     {/* <Albums/> */}
     </>
   )
 }
