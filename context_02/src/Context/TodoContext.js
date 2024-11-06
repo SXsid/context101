@@ -10,7 +10,10 @@ export const todoContext = createContext({
     setTodo:(todo)=>{},
     removeTodo:(id)=>{},
     updateTodo:(id,todo)=>{},
-    toddgled:(id)=>{}
+    toddgled:(id)=>{},
+    handleDragStart:(index)=>{},
+    handleDragEnter:(index)=>{},
+    handleDragEnd:()=>{}
 
 })
 // make the customized hook to use context hook without importin twice!!

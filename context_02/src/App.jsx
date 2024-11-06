@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import Addtodo from './Components/Addtodo';
 import { TodoProvider } from './Context/TodoContext';
 import Todod from './Components/Todod';
@@ -13,6 +13,8 @@ function App() {
       return [];
     }
   });
+  const initalPostion =useRef(null)
+  const finalPositon = useRef(null)
   
   function setTodo(prop) {
     setTodos(prev => [prop, ...prev]);
@@ -38,15 +40,38 @@ function App() {
   }
 
 
+  function handleDragStart(index){
+    initalPostion.current=index
+    console.log(index);
+    
+
+  }
+  function handleDragEnter(index){
+    finalPositon.current=index
+    console.log(index);
+    const newTodo= [...Todos]
+    const dragData = newTodo[initalPostion.current]
+    newTodo.splice(initalPostion.current,1)
+    newTodo.splice(finalPositon,0,dragData)
+    initalPostion.current=index
+    setTodos(newTodo)
+    
+    
+  }
+  function handleDragEnd(){
+    initalPostion.current=null
+    finalPositon.current=null
+  }
+
   
  
   return (
-    <TodoProvider value={{ setTodo, removeTodo, Todos, updateTodo ,toddgled}}>
+    <TodoProvider value={{ setTodo, removeTodo, Todos, updateTodo ,toddgled,handleDragEnd,handleDragStart,handleDragEnter}}>
       <Addtodo />
       {/* {JSON.stringify(Todos)} */}
       <div className='items-center flex flex-col'>
-        {Todos.map(todo => (
-          <Todod key={todo.id} todo={todo} /> 
+        {Todos.map((todo,index) => (
+          <Todod key={todo.id} todo={todo} index={index} /> 
         ))}
       </div>
     </TodoProvider>
