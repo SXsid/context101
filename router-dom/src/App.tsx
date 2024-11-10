@@ -3,6 +3,7 @@ import HomePage from "./Pages/HomePage"
 import Profile from "./Pages/Profile"
 import Reels from "./Pages/Reels"
 import NotFound from "./Pages/NotFound"
+import ProtectComp from "./Pages/ProtectComp"
 
 
 function App() {
@@ -15,12 +16,12 @@ function App() {
       children:[
         {
           path:"/homepage",
-          element:<HomePage/>
+          element:<ProtectComp><HomePage/></ProtectComp>
 
         },
         {
           path:"/reels",
-          element:<Reels/>
+          element:<ProtectComp><Reels/></ProtectComp>
         },{
           path:"/profile",
           element:<Profile/>
