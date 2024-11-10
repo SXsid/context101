@@ -16,7 +16,7 @@ function Todod({ todo, index }) {
   return (
     <div
       key={todo.id}
-      className={`flex justify-between items-center w-[1000px] p-4 rounded-lg shadow-md transition-transform ${
+      className={`flex justify-between items-center w-[350px] overflow-y-auto mt-2 p-2 rounded-lg shadow-md transition-transform ${
         readonly ? "bg-white cursor-pointer hover:shadow-lg" : "bg-green-200"
       }`}
       style={{ border: "2px solid #38b2ac" }}

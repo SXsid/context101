@@ -11,8 +11,8 @@ function Addtodo() {
         setInput(" ")
     }
   return (
-    <div className='relative flex content-center justify-center items-center mt-16 '>
-      <input className='w-[600px] h-12 rounded-2xl text-2xl forced-color-adjust-none' type='text' onChange={(e)=>setInput(e.target.value)} value={input}></input>
+    <div className='relative flex content-center justify-center items-center mt-2 '>
+      <input className='w-[400px] h-10 ml-16 rounded-2xl text-2xl forced-color-adjust-none' type='text' onChange={(e)=>setInput(e.target.value)} value={input}></input>
       <button onClick={handleSubmit} className='mx-3 bg-black text-white h-12 w-24 rounded-2xl'> ADD </button>
     </div>
   )
