@@ -17,7 +17,12 @@ function App() {
   const finalPositon = useRef(null)
   
   function setTodo(prop) {
-    setTodos(prev => [prop, ...prev]);
+    setTodos(prev => {
+      const Index = prev.findIndex(todo=>todo.completed)
+      const updated= [...prev]
+      updated.splice(Index,0,prop)
+      return updated
+    });
   }
   //it will update the local stroagge eveytime we add new todo 
   useEffect(()=>{
@@ -35,20 +40,45 @@ function App() {
   function updateTodo(id, updatedTodo) {
     setTodos(prev => prev.map(prevTodo => (prevTodo.id === id ? updatedTodo : prevTodo))); // Fixed updating logic
   }
-  function toddgled(id){
-    setTodos(prev=>prev.map(prevTodo=>prevTodo.id===id? {...prevTodo, completed: !prevTodo.completed}:prevTodo))
+  function toddgled(id) {
+   setTodos(prev=>{
+    let udpatedTodo=null
+    const latestTodos=prev.map(todo=>{
+      if(todo.id===id){
+        udpatedTodo={...todo,completed:!todo.completed}
+        console.log(udpatedTodo);
+        
+        return udpatedTodo
+      }else{
+        return todo
+      }
+    })
+    if(udpatedTodo && udpatedTodo.completed){
+      return [...latestTodos.filter(todo=>todo.id!==id),udpatedTodo]
+    }else{
+      const Index= latestTodos.findIndex(todo=>todo.completed)
+      if(Index!==-1){
+        const current=[...latestTodos.filter(todo=>todo.id!==id)]
+        current.splice(Index,0,udpatedTodo)
+        return current
+      }else{
+        return latestTodos
+      }
+    }
+   })
   }
+  
 
 
   function handleDragStart(index){
     initalPostion.current=index
-    console.log(index);
+    // console.log(index);
     
 
   }
   function handleDragEnter(index){
     finalPositon.current=index
-    console.log(index);
+    // console.log(index);
     const newTodo= [...Todos]
     const dragData = newTodo[initalPostion.current]
     newTodo.splice(initalPostion.current,1)
