@@ -17,7 +17,7 @@ function Todod({ todo, index }) {
   const styles = {
     transform: `translate3d(${transform?.x || 0}px, ${transform?.y || 0}px, 0)`,
     transition: transform ? 'none' : 'transform 0.3s ease', // Add smooth transition on drop
-    border: '2px solid #38b2ac',
+    
     height: 'auto',
   };
 
@@ -29,9 +29,11 @@ function Todod({ todo, index }) {
   const isClicked = () => toddgled(todo.id);
 
   return (
-    <div className="flex">
+    <div className="flex gap-4"
+    style={styles}>
       {/* Drag Handle */}
-      <div className="text-white mt-3 text-xl" {...listeners} {...attributes}
+      
+      <div className={`text-white mt-3 text-2xl font-bold z-1000 ${!todo.completed?"block":"hidden mx-10"}`} {...listeners} {...attributes}
       title='Drag the todo'>
       <RxDragHandleHorizontal />
 
@@ -40,12 +42,12 @@ function Todod({ todo, index }) {
       {/* Main Todo Item */}
       <div
         ref={setNodeRef}
-        className={`flex justify-between items-start w-[350px] h-auto mt-2 p-2 rounded-lg shadow-md transition-transform ${
+        className={`flex justify-between items-start w-[350px] h-auto mt-2 p-2 rounded-lg shadow-md transition-transform  ${todo.completed?"ml-10":""} ${
           readonly
             ? 'bg-[rgba(255,255,255,0.82)] bg-opacity backdrop-blur-lg backdrop-filter cursor-pointer hover:shadow-lg hover:transform hover:scale-110 duration-300'
             : 'bg-green-200'
         }`}
-        style={styles}
+        
       >
         <div className="flex items-start gap-4 w-full">
           <input
